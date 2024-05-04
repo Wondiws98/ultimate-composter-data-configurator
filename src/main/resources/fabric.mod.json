@@ -1,0 +1,39 @@
+{
+	"schemaVersion": 1,
+	"id": "ultimate_composter_data_configurator",
+	"version": "1.0.0-mc1.20-1.20.4",
+	"name": "Ultimate Composter Data Configurator",
+	"description": "The Ultimate Composter Data-driven configurator mod! Allows modders, or you, to easily determine what goes in, what goes out, how long does it takes, scaled up to 255 modifiers!",
+	"authors": [
+		"Wondiws98"
+	],
+	"contact": {
+		"homepage": "https://modrinth.com/user/Wondiws98",
+		"sources": "https://github.com/Wondiws98/ultimate-composter-data-configurator",
+		"issues": "https://github.com/Wondiws98/ultimate-composter-data-configurator/issues"
+	},
+	"custom": {
+		"modmenu": {
+			"links": {
+				"modmenu.modrinth": "https://modrinth.com/user/Wondiws98"
+			}
+		}
+	},
+	"license": "MIT",
+	"icon": "assets/real_composting/icon.png",
+	"environment": "*",
+	"entrypoints": {
+		"main": [
+			"net.wondiws98.ultimatecomposterdataconfigurator.UltimateComposterDataConfigurator"
+		]
+	},
+	"mixins": [
+		"ultimatecomposterdataconfigurator.mixins.json"
+	],
+	"depends": {
+		"fabricloader": ">=0.14.21",
+		"minecraft": ">=1.20",
+		"java": ">=17",
+		"fabric-api": "*"
+	}
+}
