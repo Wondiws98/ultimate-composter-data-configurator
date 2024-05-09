@@ -3,25 +3,10 @@ package net.wondiws98.ultimatecomposterdataconfigurator.helper;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-import net.fabricmc.fabric.api.datagen.v1.provider.FabricTagProvider;
-import net.fabricmc.fabric.api.resource.ResourceManagerHelper;
-import net.minecraft.data.server.tag.ItemTagProvider;
-import net.minecraft.data.server.tag.TagProvider;
-import net.minecraft.item.Item;
 import net.minecraft.registry.Registries;
-import net.minecraft.registry.Registry;
-import net.minecraft.registry.RegistryKey;
-import net.minecraft.registry.tag.ItemTags;
-import net.minecraft.registry.tag.TagEntry;
-import net.minecraft.registry.tag.TagFile;
-import net.minecraft.registry.tag.TagKey;
-import net.minecraft.resource.ResourceManager;
-import net.minecraft.resource.ResourceType;
 import net.minecraft.util.Identifier;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Stream;
 
 public class JsonHelper {
     public static boolean asBoolean(JsonElement element, String name) {
@@ -139,17 +124,17 @@ public class JsonHelper {
         }
     }
 
-    public static Identifier getRegistryEntryIdentifier(JsonObject object, String name, Registry<?> registry) {
-        return getRegistryEntryIdentifier(object, name, registry, true);
+    public static Identifier getItemIdentifier(JsonObject object, String name) {
+        return getItemIdentifier(object, name, true);
     }
 
-    public static Identifier getRegistryEntryIdentifier(JsonObject object, String name, Registry<?> registry, boolean isOptional) {
+    public static Identifier getItemIdentifier(JsonObject object, String name, boolean isOptional) {
         if (object.has(name)) {
             Identifier id = asIdentifier(object.get(name), name);
-            if (registry.containsId(id)) {
+            if (Registries.ITEM.containsId(id)) {
                 return id;
             } else {
-                throw createNonExistentIdException(id, registry.toString(), name);
+                throw createNonExistentIdException(id, "Item", name);
             }
         } else if (!isOptional) {
             throw createMissingRequiredFieldException(name);
@@ -157,12 +142,12 @@ public class JsonHelper {
         return null;
     }
 
-    public static Identifier getRegistryEntryIdentifier(JsonElement element, String name, Registry<?> registry) {
+    public static Identifier getItemIdentifier(JsonElement element, String name) {
         Identifier id = asIdentifier(element, name);
-        if (registry.containsId(id)) {
+        if (Registries.ITEM.containsId(id)) {
             return id;
         } else {
-            throw createNonExistentIdException(id, registry.toString(), name);
+            throw createNonExistentIdException(id, "Item", name);
         }
     }
 
@@ -175,7 +160,7 @@ public class JsonHelper {
     }
 
     private static JsonSyntaxException createWrongTypeException(String fieldName, String expectedType, String foundType) {
-        return new JsonSyntaxException("Field '" + fieldName + "' should be of type '" + expectedType + "' but instead was "+ foundType);
+        return new JsonSyntaxException("Field '" + fieldName + "' should be of type '" + expectedType + "' but instead was " + foundType);
     }
 
     private static String getType(JsonElement element) {

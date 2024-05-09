@@ -63,7 +63,7 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/composter_contents_ready"
+        "model": "ultimate_composter_data_configurator:block/composter_contents_ready"
       },
       "when": {
         "level": "8"
@@ -71,11 +71,20 @@
     },
     {
       "apply": {
-        "model": "minecraft:block/composter_content_golden"
+        "model": "ultimate_composter_data_configurator:block/composter_contents_ready_grass"
       },
       "when": {
         "level": "8",
-        "modifier": "1"
+        "modifier": 1
+      }
+    },
+    {
+      "apply": {
+        "model": "ultimate_composter_data_configurator:block/composter_contents_ready_mycelium"
+      },
+      "when": {
+        "level": "8",
+        "modifier": 2
       }
     }
   ]
